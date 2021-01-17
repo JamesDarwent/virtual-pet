@@ -70,4 +70,23 @@ describe("walk", () => {
     });
 });
 
+describe("feed", () => {
+    it("decreases hunger by 3", () => {
+        const pet = new Pet("Fido");
+
+        pet.hunger = 10;
+        pet.feed();
+
+        expect(pet.hunger).toEqual(7);
+    });
+    it("decreases hunger to a minimum of 0", () => {
+        const pet = new Pet("Fido");
+
+        pet.hunger = 2;
+        pet.feed();
+
+        expect(pet.hunger).toEqual(0);
+    });
+});
+
 
