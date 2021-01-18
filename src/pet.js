@@ -1,6 +1,8 @@
 const age = 0;
 const minHunger = 0;
+const maxHunger = 5;
 const maxFitness = 10;
+const minFitness = 3;
 
 
 function Pet(name) {
@@ -30,6 +32,20 @@ Pet.prototype.feed = function () {
     } else {
         this.hunger = 0;
     };
+};
+
+Pet.prototype.checkUp = function() {
+    if((this.fitness <= minFitness) && (this.hunger >= maxHunger)) {
+        return "I am hungry AND I need a walk";
+    };
+    if(this.fitness <= minFitness) {
+        return "I need a walk";
+    };
+    if(this.hunger >= maxHunger) {
+        return "I am hungry";
+    } else {
+        return "I feel great!";
+    };   
 };
 
 module.exports = Pet;

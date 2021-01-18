@@ -89,4 +89,41 @@ describe("feed", () => {
     });
 });
 
+describe("checkUp", () => {
+    it("if fitness is 3 or less, returns I need a walk", () => {
+        const pet = new Pet("Fido)");
+
+        pet.fitness = 3;
+        pet.checkUp();
+
+        expect(pet.checkUp()).toEqual("I need a walk");
+    });
+    it("if hunger is 5 or more, return I am hungry", () => {
+        const pet = new Pet("Fido");
+
+        pet.hunger = 7;
+        pet.checkUp();
+
+        expect(pet.checkUp()).toEqual("I am hungry");
+    });
+    it("if both of the above are true, return I am hungry and I need a walk", () => {
+        const pet = new Pet("Fido");
+
+        pet.fitness = 1;
+        pet.hunger = 5;
+        pet.checkUp();
+
+        expect(pet.checkUp()).toEqual("I am hungry AND I need a walk");
+    });
+    it("if neither of the above are true, return I feel great", () => {
+        const pet = new Pet("Fido");
+
+        pet.fitness = 4;
+        pet.hunger = 3;
+        pet.checkUp();
+
+        expect(pet.checkUp()).toEqual("I feel great!");
+    });
+});
+
 
