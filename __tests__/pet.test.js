@@ -24,8 +24,8 @@ describe("constructor", () => {
 
         expect(pet.fitness).toEqual(10);
     });
-
 });
+
 
 describe("growUp", () => {
     it("increments age by 1", () => {
@@ -49,7 +49,15 @@ describe("growUp", () => {
 
         expect(pet.fitness).toEqual(7);
     });
+    it("throws an error if pet is no longer alive", () => {
+        const pet = new Pet("Fido");
+
+        pet.age = 30;
+
+        expect(() => pet.growUp()).toThrow("Your pet is no longer alive :(");
+    });
 });
+
 
 describe("walk", () => {
     it("increases fitness by 4", () => {
@@ -68,16 +76,24 @@ describe("walk", () => {
 
         expect(pet.fitness).toEqual(10);
     });
+    it("throws an error if pet is no longer alive", () => {
+        const pet = new Pet("Fido");
+
+        pet.fitness = 0;
+
+        expect(() => pet.walk()).toThrow("Your pet is no longer alive :(");
+    });
 });
+
 
 describe("feed", () => {
     it("decreases hunger by 3", () => {
         const pet = new Pet("Fido");
 
-        pet.hunger = 10;
+        pet.hunger = 9;
         pet.feed();
 
-        expect(pet.hunger).toEqual(7);
+        expect(pet.hunger).toEqual(6);
     });
     it("decreases hunger to a minimum of 0", () => {
         const pet = new Pet("Fido");
@@ -87,7 +103,15 @@ describe("feed", () => {
 
         expect(pet.hunger).toEqual(0);
     });
+    it("throws an error if pet is no longer alive", () => {
+        const pet = new Pet("Fido");
+
+        pet.hunger = 10;
+
+        expect(() => pet.feed()).toThrow("Your pet is no longer alive :(");
+    });
 });
+
 
 describe("checkUp", () => {
     it("if fitness is 3 or less, returns I need a walk", () => {
@@ -124,7 +148,15 @@ describe("checkUp", () => {
 
         expect(pet.checkUp()).toEqual("I feel great!");
     });
+    it("throws an error if pet is no longer alive", () => {
+        const pet = new Pet("Fido");
+
+        pet.fitness = 0;
+
+        expect(() => pet.checkUp()).toThrow("Your pet is no longer alive :(");
+    });
 });
+
 
 describe("isAlive", () => {
     it("returns false if fitness is 0 or less, & if hunger is 10 or more, & if age is 30 or more", () => {
