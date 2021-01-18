@@ -126,4 +126,21 @@ describe("checkUp", () => {
     });
 });
 
+describe("isAlive", () => {
+    it("returns false if fitness is 0 or less, & if hunger is 10 or more, & if age is 30 or more", () => {
+        const pet = new Pet("Fido");
+
+        pet.age = 31;
+        
+        expect(pet.isAlive).toEqual(false);
+    });
+    it("returns ture if none of the above are true", () => {
+        const pet = new Pet("Fido");
+
+        pet.age = 28;
+        
+        expect(pet.isAlive).toEqual(true);
+    });
+});
+
 
