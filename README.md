@@ -4,9 +4,9 @@
     </p>
 <h2>Overview</h2>
     <p>
-        This game is designed to create a Tamagotchi style virtual pet, which you can look after with regular feeding and exercise.</br>
-        As your pet grows, their fitness and hunger will decrease and increase respectively. Checking your pet's status is the best way to stay on top of catering for it's needs!</br>
-        Be sure not to neglect them too much, or sadly your pet will die 💀 Just like a real pet then! Except you can't play with it...</br>
+        This game is designed to create a Tamagotchi style virtual pet, which you can look after with regular feeding and exercise.<br></br>
+        As your pet grows, their fitness and hunger will decrease and increase respectively. Checking your pet's status is the best way to stay on top of catering for it's needs!<br></br>
+        Be sure not to neglect them too much, or sadly your pet will die 💀 Just like a real pet then! Except you can't play with it...<br></br>
         FRET NOT! I have also added a play method, which will increase your pet's happiness. Be sure to play with them often, or like me, your pet may die of sadness.
     </p>
 <h2>Game Features</h2>
