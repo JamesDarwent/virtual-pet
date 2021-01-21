@@ -24,7 +24,7 @@
             <li>All defualt stats can be configured to your liking</li>
         </ul>
     </p>
-<h2>Methods ()</h2>
+<h2>How to play</h2>
     <p>
         <ul>
             <li>Node</li>

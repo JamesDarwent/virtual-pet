@@ -1,4 +1,29 @@
-const Pet = require("../src/pet");
+const {
+    Pet,
+    birth_age,
+    birth_hunger,
+    birth_fitness,
+    birth_happiness,
+    age_increment,
+    hunger_increment,
+    fitness_decrement,
+    happiness_decrement,
+    fitness_increment,
+    hunger_decrement,
+    happiness_increment,
+    feeling_hungry,
+    feeling_weak,
+    feeling_lonely,
+    minimum_hunger,
+    maximum_fitness,
+    maximum_happiness,
+    age_limit,
+    hunger_limit,
+    fitness_limit,
+    happiness_limit,
+    RIP1,
+    RIP2
+} = require("../src/pet");
 
 describe("constructor", () => {
     it("returns an object", () => {
@@ -11,255 +36,243 @@ describe("constructor", () => {
         expect(pet.name).toEqual("Biscuit");
     });
 
-    it("has an initial age of 0", () => {
+    it("has an initial age of birth_age", () => {
         const pet = new Pet("Biscuit");
 
-        expect(pet.age).toEqual(0);
+        expect(pet.age).toEqual(birth_age);
     });
 
-    it("has an initial hunger of 0", () => {
+    it("has an initial hunger of birth_hunger", () => {
         const pet = new Pet("Biscuit");
 
-        expect(pet.hunger).toEqual(0);
+        expect(pet.hunger).toEqual(birth_hunger);
     });
 
     it("has an initial fitness of 10", () => {
         const pet = new Pet("Biscuit");
 
-        expect(pet.fitness).toEqual(10);
+        expect(pet.fitness).toEqual(birth_fitness);
     });
 
-    it("has initial happiness of 10", () =>  {
+    it("has initial happiness of birth_happiness", () =>  {
         const pet = new Pet("Biscuit");
 
-        expect(pet.happiness).toEqual(10);
+        expect(pet.happiness).toEqual(birth_happiness);
+    });
+
+    it("has no initial children", () => {
+        const pet = new Pet("Biscuit");
+
+        expect(pet.children).toHaveLength(0);
     });
 });
 
 
 describe("growUp", () => {
-    it("increments age by 1", () => {
+    it("increases age by age_increment", () => {
         const pet = new Pet("Biscuit");
 
         pet.growUp();
 
-        expect(pet.age).toEqual(1);
+        expect(pet.age).toEqual(age_increment);
     });
 
-    it("increases hunger by 5", () => {
+    it("increases hunger by hunger_increment", () => {
         const pet = new Pet("Biscuit");
 
         pet.growUp();
 
-        expect(pet.hunger).toEqual(5);
+        expect(pet.hunger).toEqual(hunger_increment);
     });
 
-    it("decreases fitness by 3", () => {
+    it("decreases fitness by fitness_decrement", () => {
         const pet = new Pet("Biscuit");
 
         pet.growUp();
 
-        expect(pet.fitness).toEqual(7);
+        expect(pet.fitness).toEqual(birth_fitness - fitness_decrement);
     });
 
-    it("decreases happiness by 5", () => {
+    it("decreases happiness by happiness_decrement", () => {
         const pet = new Pet("Biscuit");
 
         pet.growUp();
 
-        expect(pet.happiness).toEqual(5);
+        expect(pet.happiness).toEqual(birth_happiness - happiness_decrement);
     });
 
     it("throws an error if pet is no longer alive", () => {
         const pet = new Pet("Biscuit");
 
-        pet.age = 30;
+        pet.age = age_limit;
 
-        expect(() => pet.growUp()).toThrow("R.I.P Biscuit. A pet is for life, not just for Christmas");
+        expect(() => pet.growUp()).toThrow(`${RIP1} ${pet.name}. ${RIP2}`);
     });
 });
 
 
 describe("walk", () => {
-    it("increases fitness by 4", () => {
+    it("increases fitness by fitness_increment", () => {
         const pet = new Pet("Biscuit");
 
         pet.fitness = 4
         pet.walk();
 
-        expect(pet.fitness).toEqual(8);
+        expect(pet.fitness).toEqual(4 + fitness_increment);
     });
 
-    it("increases fitness to a maximum of 10", () => {
+    it("increases fitness to maximum_fitness", () => {
         const pet = new Pet("Biscuit");
 
-        pet.fitness = 8;
+        pet.fitness = maximum_fitness - 2;
         pet.walk();
 
-        expect(pet.fitness).toEqual(10);
-    });
-
-    xit("increases happiness by 1", () => {
-        const pet = new Pet("Biscuit");
-
-        pet.happiness = 3;
-        pet.walk();
-
-        expect(pet.happiness).toEqual(4);
-    });
-
-    xit("increases happiness to a maximum of 10", () =>{
-        const pet = new Pet("Biscuit");
-
-        pet.happiness = 10;
-        pet.walk();
-
-        expect(pet.happiness).toEqual(10);
+        expect(pet.fitness).toEqual(maximum_fitness);
     });
 
     it("throws an error if pet is no longer alive", () => {
         const pet = new Pet("Biscuit");
 
-        pet.fitness = 0;
+        pet.fitness = fitness_limit;
 
-        expect(() => pet.walk()).toThrow("R.I.P Biscuit. A pet is for life, not just for Christmas");
+        expect(() => pet.walk()).toThrow(`${RIP1} ${pet.name}. ${RIP2}`);
     });
 });
 
 
 describe("feed", () => {
-    it("decreases hunger by 3", () => {
+    it("decreases hunger by hunger_decrement", () => {
         const pet = new Pet("Biscuit");
 
         pet.hunger = 9;
         pet.feed();
 
-        expect(pet.hunger).toEqual(6);
+        expect(pet.hunger).toEqual(9 - hunger_decrement);
     });
 
-    it("decreases hunger to a minimum of 0", () => {
+    it("decreases hunger to minimum_hunger", () => {
         const pet = new Pet("Biscuit");
 
-        pet.hunger = 2;
+        pet.hunger = minimum_hunger + 2;
         pet.feed();
 
-        expect(pet.hunger).toEqual(0);
+        expect(pet.hunger).toEqual(minimum_hunger);
     });
 
     it("throws an error if pet is no longer alive", () => {
         const pet = new Pet("Biscuit");
 
-        pet.hunger = 10;
+        pet.hunger = hunger_limit;
 
-        expect(() => pet.feed()).toThrow("R.I.P Biscuit. A pet is for life, not just for Christmas");
+        expect(() => pet.feed()).toThrow(`${RIP1} ${pet.name}. ${RIP2}`);
     });
 });
 
 
 describe("play", () => {
-    it("increases happiness by 3", () => {
+    it("increases happiness by happiness_increment", () => {
         const pet = new Pet("Biscuit");
 
         pet.happiness = 5;
         pet.play();
 
-        expect(pet.happiness).toEqual(8);
+        expect(pet.happiness).toEqual(5 + happiness_increment);
     });
 
-    it("increases happiness to a maximum of 10", () => {
+    it("increases happiness to maximum-happiness", () => {
         const pet = new Pet("Biscuit");
 
-        pet.happiness = 9;
+        pet.happiness = maximum_happiness - 1;
         pet.play();
 
-        expect(pet.happiness).toEqual(10);
+        expect(pet.happiness).toEqual(maximum_happiness);
     });
 
     it("throws an error if pet is no longer alive", () => {
         const pet = new Pet("Biscuit");
 
-        pet.happiness = 0;
+        pet.happiness = happiness_limit;
 
-        expect(() => pet.play()).toThrow("R.I.P Biscuit. A pet is for life, not just for Christmas");
+        expect(() => pet.play()).toThrow(`${RIP1} ${pet.name}. ${RIP2}`);
     });
 });
 
 
 describe("checkUp", () => {
-    it("if fitness is 3 or less, returns I need a walk", () => {
+    it("if fitness <= feeling_weak, returns I need a walk", () => {
         const pet = new Pet("Biscuit");
 
-        pet.fitness = 3;
+        pet.fitness = feeling_weak;
         pet.checkUp();
 
         expect(pet.checkUp()).toEqual("I need a walk");
     });
 
-    it("if hunger is 5 or more, return I am hungry", () => {
+    it("if hunger >= feeling_hungry, return I am hungry", () => {
         const pet = new Pet("Biscuit");
 
-        pet.hunger = 7;
+        pet.hunger = feeling_hungry;
         pet.checkUp();
 
         expect(pet.checkUp()).toEqual("I am hungry");
     });
 
-    it("if happiness is 5 or less, returns I feel lonely", () => {
+    it("if happiness <= feeling_lonely, returns I feel lonely", () => {
         const pet = new Pet("Biscuit");
 
-        pet.happiness = 5;
+        pet.happiness = feeling_lonely;
         pet.checkUp();
 
         expect(pet.checkUp()).toEqual("I feel lonely :(");
     });
 
-    it("if hunger is high and fitness is low, returns I am hungry and I need a walk", () => {
+    it("if fitness <= feeling_weak and hunger >= feeling_hungry, returns I am hungry and I need a walk", () => {
         const pet = new Pet("Biscuit");
 
-        pet.fitness = 1;
-        pet.hunger = 5;
+        pet.fitness = feeling_weak - 1;
+        pet.hunger = feeling_hungry + 2;
         pet.checkUp();
 
         expect(pet.checkUp()).toEqual("I am hungry and I need a walk");
     });
 
-    it("if hunger is high and happiness is low, returns I feel hungry and lonely", () => {
+    it("if hunger >= feeling_hungry and happiness <= feeling_lonely, returns I feel hungry and lonely", () => {
         const pet = new Pet("Biscuit");
 
-        pet.hunger = 5;
-        pet.happiness = 2;
+        pet.hunger = feeling_hungry + 1;
+        pet.happiness = feeling_lonely - 3;
         pet.checkUp();
 
         expect(pet.checkUp()).toEqual("I feel hungry and lonely");
     });
 
-    it("if happiness and fitness are low, returns I feel lonely and need a walk", () => {
+    it("if happiness <= feeling_lonely and fitness <= feeling_weak, returns I feel lonely and need a walk", () => {
         const pet = new Pet("Biscuit");
 
-        pet.fitness = 1;
-        pet.happiness = 3;
+        pet.fitness = feeling_weak - 1;
+        pet.happiness = feeling_lonely - 2;
         pet.checkUp();
 
         expect(pet.checkUp()).toEqual("I feel lonely and need a walk");
     });
 
-    it("if all of the above are true, return I am hungry, I need a walk and I feel lonely", () => {
+    it("if all of the above are true, return I feel lonely, hungry and I need a walk", () => {
         const pet = new Pet("Biscuit");
 
-        pet.fitness = 1;
-        pet.hunger = 5;
-        pet.happiness = 4;
+        pet.fitness = feeling_weak;
+        pet.hunger = feeling_hungry;
+        pet.happiness = feeling_lonely;
         pet.checkUp();
 
         expect(pet.checkUp()).toEqual("I feel lonely, hungry, and I need a walk");
     });
 
-    it("if neither of the above are true, return I feel great", () => {
+    it("if none of the above are true, return I feel great", () => {
         const pet = new Pet("Biscuit");
 
-        pet.fitness = 4;
-        pet.hunger = 3;
-        pet.happiness = 7;
+        pet.fitness = feeling_weak + 1;
+        pet.hunger = feeling_hungry - 2;
+        pet.happiness = feeling_lonely + 4;
         pet.checkUp();
 
         expect(pet.checkUp()).toEqual("I feel great!");
@@ -268,9 +281,9 @@ describe("checkUp", () => {
     it("throws an error if pet is no longer alive", () => {
         const pet = new Pet("Biscuit");
 
-        pet.fitness = 0;
+        pet.fitness = fitness_limit;
 
-        expect(pet.checkUp()).toEqual("R.I.P Biscuit. A pet is for life, not just for Christmas");
+        expect(pet.checkUp()).toEqual(`${RIP1} ${pet.name}. ${RIP2}`);
     });
 });
 
@@ -279,7 +292,7 @@ describe("isAlive", () => {
     it("returns false if pet is no longer alive", () => {
         const pet = new Pet("Biscuit");
 
-        pet.age = 31;
+        pet.age = age_limit + 1;
         
         expect(pet.isAlive).toEqual(false);
     });
@@ -287,8 +300,34 @@ describe("isAlive", () => {
     it("returns ture if pet is alive", () => {
         const pet = new Pet("Biscuit");
 
-        pet.age = 28;
+        pet.age = age_limit - 2;
         
         expect(pet.isAlive).toEqual(true);
+    });
+});
+
+
+describe("adoptChild", () => {
+    it("adds a child to the array of children", () => {
+        const pet = new Pet("Biscuit");
+
+        pet.adoptChild("Teacup");
+
+        expect(pet.children).toHaveLength(1);
+    });
+
+    it("checks contents of new child ", () => {
+        const pet = new Pet("Biscuit");
+
+        pet.adoptChild("Teacup");
+
+        expect(pet.children).toEqual([{
+            name: 'Teacup',
+            age: 0,
+            hunger: 0,
+            fitness: 10,
+            happiness: 10,
+            children: []
+        }]);
     });
 });
